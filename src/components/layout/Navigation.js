@@ -1,4 +1,4 @@
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import Cookies from "js-cookie";
 import React from "react";
 import { NavLink } from "react-router-dom";
