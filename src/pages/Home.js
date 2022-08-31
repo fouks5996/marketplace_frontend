@@ -14,10 +14,8 @@ function Home(props) {
 	const API = "http://127.0.0.1:3000/articles";
 	const [data, setData] = useState();
 	const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
-
 	const loggedd = useAtomValue(logged);
 	const token = Cookies.get("token");
-	const current_user = useAtomValue(currentuser);
 
 	const {
 		register,

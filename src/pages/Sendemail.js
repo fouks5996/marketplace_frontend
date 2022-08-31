@@ -3,25 +3,27 @@ import { sendForm } from "@emailjs/browser";
 import { useNavigate } from "react-router-dom";
 
 function Sendemail(props) {
-	const form = useRef();
 	const [show, setShow] = useState(false);
+	const API_URL_RESET = "http://localhost:3000/users/password";
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		sendForm(
-			"service_09xl3zh",
-			"template_q6ra29y",
-			form.current,
-			"0Bg9DAwDXxsXNdrlv"
-		).then(
-			(result) => {
-				console.log(result.text);
-				setShow(true);
+		fetch(API_URL_RESET, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
 			},
-			(error) => {
-				console.log(error.text);
-			}
-		);
+			body: JSON.stringify({ user: { email: e.target.email.value } }),
+		})
+			.then((response) => {
+				response.json();
+			})
+			.then((data) => {
+				console.log(data);
+				setShow(true);
+			})
+			.catch((error) => console.log(error.message));
 	};
 
 	return (
@@ -30,10 +32,7 @@ function Sendemail(props) {
 				{" "}
 				Veuillez noter votre adresse email :
 			</h1>
-			<form
-				onSubmit={handleSubmit}
-				ref={form}
-				className='flex flex-col max-w-xs gap-3'>
+			<form onSubmit={handleSubmit} className='flex flex-col max-w-xs gap-3'>
 				<input
 					className='border h-10 pl-3 rounded-md'
 					placeholder='Noter votre mail'

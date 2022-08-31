@@ -9,6 +9,7 @@ function usePostForm(url, data, setLogged, current_user, navigate, path) {
 		body: JSON.stringify({ user: data }),
 	})
 		.then((response) => {
+			console.log(response);
 			Cookies.set(
 				"token",
 				response.headers.get("Authorization").replace("Bearer ", "")
