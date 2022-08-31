@@ -66,9 +66,9 @@ export const errorMessageValues = {
 
 	password: {
 		required: "Le mot de passe est requis",
-		pattern: {
-			value: /^([A-Z][a-z]+)+$/,
-			message: "Le mot de passe doit contenir au moins 1 majuscule",
-		},
+		// pattern: {
+		// 	value: /^([A-Z][a-z]+)+$/,
+		// 	message: "Le mot de passe doit contenir au moins 1 majuscule",
+		// },
 	},
 };
