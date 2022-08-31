@@ -63,12 +63,12 @@ function Home(props) {
 						<p> Titre </p>
 						<input
 							className={`border h-10 pl-3 rounded-md  ${errorInput(
-								errors.titre
+								errors.title
 							)}`}
 							type='text'
-							{...register("title", errorMessageValues.titre)}
+							{...register("title", errorMessageValues.title)}
 						/>
-						{errorMessage(errors.titre)}
+						{errorMessage(errors.title)}
 					</div>
 					<div className='flex flex-col'>
 						<p> Content </p>
