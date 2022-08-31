@@ -9,7 +9,7 @@ import {
 	errorMessage,
 } from "../components/forms/errors";
 
-function Post({ article }) {
+function Post({ article, forceUpdate }) {
 	const [editing, setEditing] = useState(false);
 	const current_user = useAtomValue(currentuser);
 	const token = Cookies.get("token");
@@ -24,15 +24,9 @@ function Post({ article }) {
 		fetch(`http://127.0.0.1:3000/articles/${id}`, {
 			method: "DELETE",
 			headers: { Authorization: `Bearer ${token}` },
-		})
-			.then((response) => {
-				return response.json();
-			})
-			.then((res) => {
-				console.log(res);
-			});
-
-		window.location.reload();
+		}).then((response) => {
+			forceUpdate();
+		});
 	};
 
 	const onSubmit = (data) => {
@@ -45,10 +39,11 @@ function Post({ article }) {
 			body: JSON.stringify({ article: data }),
 		})
 			.then((response) => {
+				forceUpdate();
+				setEditing(false);
 				return response.json();
 			})
 			.then((res) => {});
-		window.location.reload();
 	};
 
 	return (

@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
 import { currentuser, logged } from "../components/atoms/logged";
 import {
@@ -13,6 +13,7 @@ import Post from "../components/Post";
 function Home(props) {
 	const API = "http://127.0.0.1:3000/articles";
 	const [data, setData] = useState();
+	const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
 	const loggedd = useAtomValue(logged);
 	const token = Cookies.get("token");
@@ -33,7 +34,7 @@ function Home(props) {
 				.then((res) => {
 					setData(res);
 				});
-	}, [loggedd, setData]);
+	}, [loggedd, setData, recucerValue]);
 
 	const onSubmit = (data) => {
 		fetch(API, {
@@ -45,11 +46,10 @@ function Home(props) {
 			body: JSON.stringify({ article: data }),
 		})
 			.then((response) => {
+				forceUpdate();
 				return response.json();
 			})
 			.then((res) => {});
-
-		window.location.reload();
 	};
 
 	return (
@@ -91,7 +91,10 @@ function Home(props) {
 			)}
 
 			<div className='flex gap-2'>
-				{data && data.map((article) => <Post article={article} />)}
+				{data &&
+					data.map((article) => (
+						<Post article={article} forceUpdate={forceUpdate} />
+					))}
 			</div>
 		</div>
 	);
