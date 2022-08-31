@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import FormLogin from "./components/forms/login";
-import Form from "./components/forms/register";
+import FormLogin from "./components/auth/login";
+import Form from "./components/auth/register";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import ReinitPassword from "./pages/ReinitPassword";
 import Sendemail from "./pages/Sendemail";
 import User from "./pages/User";
+import ArticleDetails from './pages/ArticleDetails';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 				<Route path='/sendemail' element={<Sendemail />} />
 				<Route path='/reinitialisation' element={<ReinitPassword />} />
 				<Route path='/login' element={<FormLogin />} />
+				<Route path='/show/:articleId' element={<ArticleDetails/>}/>
 			</Routes>
 		</Layout>
 	);

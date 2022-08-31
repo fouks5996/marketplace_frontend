@@ -1,25 +1,21 @@
-// import Cookies from "js-cookie";
-// import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 
-// function useFetch(url, token = "", method = "GET") {
-// 	const [data, setData] = useState();
-// 	const [test, settest] = useState(false);
+function useFetch(url, token = "", method = "GET") {
+	const [data, setData] = useState();
 
-// 	useEffect(() => {
-// 		fetch(url, {
-// 			method: method,
-// 			headers: { Authorization: `Bearer ${token}` },
-// 		})
-// 			.then((res) => res.json())
-// 			.then((res) => {
-// 				setData(res);
-// 				if (res.jwt) {
-// 					Cookies.set("token", res.jwt);
-// 				}
-// 			});
-// 	}, [url, token, method]);
+	useEffect(() => {
+		fetch(url, {
+			method: method,
+			headers: { Authorization: `Bearer ${token}` },
+		})
+			.then((res) => res.json())
+			.then((res) => {
+				setData(res);
+			});
+	}, [url, token, method]);
 
-// 	return [data, test];
-// }
+	return [data];
+}
 
-// export default useFetch;
+export default useFetch;

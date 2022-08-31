@@ -7,12 +7,18 @@ import {
 	errorMessageValues,
 	errorInput,
 	errorMessage,
-} from "../components/forms/errors";
+} from "./auth/errors";
 
-function Post({ article, forceUpdate }) {
+import { logged } from "../components/atoms/logged";
+import { Link } from "react-router-dom";
+
+
+function Article({ article, forceUpdate }) {
 	const [editing, setEditing] = useState(false);
 	const current_user = useAtomValue(currentuser);
 	const token = Cookies.get("token");
+
+	const isLogged = useAtomValue(logged);
 
 	const {
 		register,
@@ -46,11 +52,16 @@ function Post({ article, forceUpdate }) {
 			.then((res) => {});
 	};
 
+	const slugifyTitle = (title) => {
+		return title.replace(" ", "-").toLowerCase();
+		 
+	}
+
 	return (
 		<div className='border border-black w-fit p-4 '>
 			{!editing ? (
 				<>
-					<h1> Titre : {article.title} </h1>
+					<Link to ={`/show/${article.id}`}><h1> Titre : {article.title} </h1></Link>
 					<h1 className='max-w-[250px]'>Content : {article.content}</h1>
 					<h1 className='max-w-[250px]'>prix : {article.price}</h1>
 				</>
@@ -107,7 +118,7 @@ function Post({ article, forceUpdate }) {
 
 			<h1> User : {article.user.email} </h1>
 
-			{current_user.email === article.user.email && (
+			{(current_user.email === article.user.email && isLogged) && (
 				<>
 					<p
 						className='text-orange-500 cursor-pointer'
@@ -127,4 +138,4 @@ function Post({ article, forceUpdate }) {
 	);
 }
 
-export default Post;
+export default Article;
