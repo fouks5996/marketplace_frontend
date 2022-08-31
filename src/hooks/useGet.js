@@ -1,8 +1,8 @@
-import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
 function useFetch(url, token = "", method = "GET") {
 	const [data, setData] = useState();
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		fetch(url, {
@@ -12,10 +12,11 @@ function useFetch(url, token = "", method = "GET") {
 			.then((res) => res.json())
 			.then((res) => {
 				setData(res);
+				setLoading(true);
 			});
 	}, [url, token, method]);
 
-	return [data];
+	return [data, loading];
 }
 
 export default useFetch;

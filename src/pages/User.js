@@ -21,7 +21,7 @@ function User(props) {
 					console.log(res);
 					setData(res.user);
 				});
-	}, [setData]);
+	}, [loggedd, setData, token]);
 
 	return (
 		<div className='flex flex-col justify-center gap-2'>

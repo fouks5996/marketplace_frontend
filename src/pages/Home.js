@@ -12,29 +12,21 @@ function Home(props) {
 	const [data, setData] = useState();
 	const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 	const isLogged = useAtomValue(logged);
-	
-
-	
 
 	useEffect(() => {
-		
-			fetch(API)
-				.then((response) => {
-					return response.json();
-				})
-				.then((res) => {
-					setData(res);
-				});
+		fetch(API)
+			.then((response) => {
+				return response.json();
+			})
+			.then((res) => {
+				setData(res);
+			});
 	}, [setData, recucerValue]);
-
-	
 
 	return (
 		<div>
 			<h1 className='text-3xl font-bold underline'>Hello Home!</h1>
-			{isLogged && (
-				<CreateArticle forceUpdate={forceUpdate}/>
-			)}
+			{isLogged && <CreateArticle forceUpdate={forceUpdate} />}
 
 			<div className='flex gap-2'>
 				{data &&
