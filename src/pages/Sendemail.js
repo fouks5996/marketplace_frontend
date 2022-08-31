@@ -1,6 +1,4 @@
-import React, { useRef, useState } from "react";
-import { sendForm } from "@emailjs/browser";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 
 function Sendemail(props) {
 	const [show, setShow] = useState(false);
