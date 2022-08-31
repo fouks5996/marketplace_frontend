@@ -1,9 +1,8 @@
 import { useSetAtom } from "jotai";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { API } from "../../utils/variables";
-import { logged } from "../atoms/logged";
+import { Link, useNavigate } from "react-router-dom";
+import { currentuser, logged } from "../atoms/logged";
 import { errorMessageValues, errorInput, errorMessage } from "./errors";
 import usePostForm from "./usePostForm";
 
@@ -15,27 +14,36 @@ function FormLogin(props) {
 	} = useForm();
 
 	const setLogged = useSetAtom(logged);
+	const current_user = useSetAtom(currentuser);
 	const navigate = useNavigate();
 
 	const OnSubmit = (data) => {
-		usePostForm(API + "api/auth/local", data, setLogged, navigate, "/about");
+		usePostForm(
+			"http://127.0.0.1:3000/users/sign_in",
+			data,
+			setLogged,
+			current_user,
+			navigate,
+			"/user"
+		);
 	};
 
 	return (
-		<div>
+		<div className='mx-[200px] mt-10'>
+			<h1 className='font-bold text-2xl'> Se connecter </h1>
 			<form
-				className={`max-w-[400px] flex flex-col gap-3 mt-10`}
+				className={`max-w-[400px] flex flex-col gap-3 mt-2`}
 				onSubmit={handleSubmit(OnSubmit)}>
 				<div className='flex flex-col'>
-					<p> Identifier </p>
+					<p> Email </p>
 					<input
 						className={`border h-10 pl-3 rounded-md  ${errorInput(
-							errors.identifier
+							errors.email
 						)}`}
 						type='text'
-						{...register("identifier", errorMessageValues.identifier)}
+						{...register("email", errorMessageValues.email)}
 					/>
-					{errorMessage(errors.identifier)}
+					{errorMessage(errors.email)}
 				</div>
 				<div className='flex flex-col'>
 					<p> Password </p>
@@ -48,6 +56,7 @@ function FormLogin(props) {
 					/>
 					{errorMessage(errors.password)}
 				</div>
+				<Link to='/sendemail'> Mot de passe oublié ? </Link>
 				<button
 					className='py-2 px-4 rounded text-white bg-slate-800'
 					type='submit'>

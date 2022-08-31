@@ -20,17 +20,42 @@ export const errorMessageValues = {
 			message: "Le pseudo doit faire minimum 3 caractères",
 		},
 	},
-	identifier: {
-		required: "Votre identifiant est incorrect",
+	// email: {
+	// 	required: "Votre identifiant est incorrect",
+	// 	maxLength: {
+	// 		value: 40,
+	// 		message: "Le pseudo doit faire maximum 20 caractères",
+	// 	},
+	// 	minLength: {
+	// 		value: 3,
+	// 		message: "Le pseudo doit faire minimum 3 caractères",
+	// 	},
+	// },
+
+	titre: {
+		required: "Le titre est requis",
 		maxLength: {
 			value: 20,
-			message: "Le pseudo doit faire maximum 20 caractères",
+			message: "Le titre doit faire maximum 20 caractères",
 		},
 		minLength: {
 			value: 3,
-			message: "Le pseudo doit faire minimum 3 caractères",
+			message: "Le titre doit faire minimum 3 caractères",
 		},
 	},
+
+	content: {
+		required: "Le content est requis",
+		maxLength: {
+			value: 20,
+			message: "Le content doit faire maximum 20 caractères",
+		},
+		minLength: {
+			value: 3,
+			message: "Le content doit faire minimum 3 caractères",
+		},
+	},
+
 	email: {
 		required: "L'email est requis",
 		pattern: {

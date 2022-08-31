@@ -1,16 +1,24 @@
 import Cookies from "js-cookie";
 
-function usePostForm(url, data, setLogged, navigate, path) {
+function usePostForm(url, data, setLogged, current_user, navigate, path) {
 	fetch(url, {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify(data),
+		body: JSON.stringify({ user: data }),
 	})
-		.then((res) => res.json())
+		.then((response) => {
+			Cookies.set(
+				"token",
+				response.headers.get("Authorization").replace("Bearer ", "")
+			);
+
+			return response.json();
+		})
 		.then((res) => {
-			Cookies.set("token", res.jwt);
+			console.log(res);
+			current_user(res.user);
 			setLogged && setLogged(true);
 			navigate && navigate(path);
 		});

@@ -2,7 +2,7 @@ import { useSetAtom } from "jotai";
 import { useForm } from "react-hook-form";
 import { errorMessageValues, errorInput, errorMessage } from "./errors";
 import usePostForm from "./usePostForm";
-import { logged } from "../atoms/logged";
+import { currentuser, logged } from "../atoms/logged";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../utils/variables";
 
@@ -14,34 +14,26 @@ function Form(props) {
 	} = useForm();
 
 	const setLogged = useSetAtom(logged);
+	const current_user = useSetAtom(currentuser);
 	const navigate = useNavigate();
 
 	const OnSubmit = (data) => {
 		usePostForm(
-			API + "api/auth/local/register",
+			"http://127.0.0.1:3000/users",
 			data,
 			setLogged,
+			current_user,
 			navigate,
-			"/about"
+			"/user"
 		);
 	};
 
 	return (
-		<div>
+		<div className='mx-[200px] mt-10'>
+			<h1 className='font-bold text-2xl'> S'inscrire </h1>
 			<form
-				className={`max-w-[400px] flex flex-col gap-3 mt-10`}
+				className={`max-w-[400px] flex flex-col gap-3 mt-2`}
 				onSubmit={handleSubmit(OnSubmit)}>
-				<div className='flex flex-col'>
-					<p> Username </p>
-					<input
-						className={`border h-10 pl-3 rounded-md  ${errorInput(
-							errors.username
-						)}`}
-						type='text'
-						{...register("username", errorMessageValues.username)}
-					/>
-					{errorMessage(errors.username)}
-				</div>
 				<div className='flex flex-col'>
 					<p> Email </p>
 					<input
