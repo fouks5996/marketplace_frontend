@@ -1,7 +1,3 @@
-# Simple starter
-- TailwindCSS
-- React-router
-- React hook form
-- Navigation
+# Boilerplate Frontend
 
---> git clone https://github.com/fouks5996/react-starter.git
+- npm i
