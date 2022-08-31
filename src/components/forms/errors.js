@@ -20,6 +20,14 @@ export const errorMessageValues = {
 			message: "Le pseudo doit faire minimum 3 caractères",
 		},
 	},
+
+	price: {
+		required: "Le prix est requis",
+		min: {
+			value: 10,
+			message: "Le prix du bien doit être supérieur à 10€",
+		},
+	},
 	// email: {
 	// 	required: "Votre identifiant est incorrect",
 	// 	maxLength: {

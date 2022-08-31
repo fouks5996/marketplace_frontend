@@ -2,7 +2,7 @@ import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
 import React, { useEffect, useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
-import { currentuser, logged } from "../components/atoms/logged";
+import { logged } from "../components/atoms/logged";
 import {
 	errorMessageValues,
 	errorInput,
@@ -78,6 +78,17 @@ function Home(props) {
 							{...register("content", errorMessageValues.content)}
 						/>
 						{errorMessage(errors.content)}
+					</div>
+					<div className='flex flex-col'>
+						<p> Price </p>
+						<input
+							className={`border h-10 pl-3 rounded-md  ${errorInput(
+								errors.price
+							)}`}
+							type='number'
+							{...register("price", errorMessageValues.price)}
+						/>
+						{errorMessage(errors.price)}
 					</div>
 					<button
 						className='py-2 px-4 rounded text-white bg-slate-800'

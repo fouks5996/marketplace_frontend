@@ -52,6 +52,7 @@ function Post({ article, forceUpdate }) {
 				<>
 					<h1> Titre : {article.title} </h1>
 					<h1 className='max-w-[250px]'>Content : {article.content}</h1>
+					<h1 className='max-w-[250px]'>prix : {article.price}</h1>
 				</>
 			) : (
 				<>
@@ -81,6 +82,18 @@ function Post({ article, forceUpdate }) {
 								{...register("content", errorMessageValues.content)}
 							/>
 							{errorMessage(errors.content)}
+						</div>
+						<div className='flex items-center gap-2'>
+							<p> Price </p>
+							<input
+								defaultValue={article.price}
+								className={`border h-10 pl-3 rounded-md  ${errorInput(
+									errors.price
+								)}`}
+								type='number'
+								{...register("price", errorMessageValues.price)}
+							/>
+							{errorMessage(errors.price)}
 						</div>
 						<button
 							className='py-2 px-4 rounded text-white bg-slate-800'
