@@ -1,15 +1,18 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { API } from "../../utils/variables";
-
 import Article from '../../components/article/Article'
 import CreateArticle from "../../components/CreateArticle";
 import hero from "../../assets/images/hero.jpeg"
-import './home.scss'
+import { Link } from 'react-router-dom';
+import './home.scss';
+import { logged } from "../../components/atoms/logged";
+import { useAtomValue } from 'jotai';
 
 
 function Home(props) {
 	const [data, setData] = useState();
 	const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
+	const isLogged = useAtomValue(logged);
 
 	useEffect(() => {
 		fetch(API + "articles")
@@ -28,8 +31,8 @@ function Home(props) {
 					<img src={hero} alt='' />
 					<h1>Bienvenue sur notre MarketPlace</h1>
 					<div className='btn-container'>
-						<button>Acheter des biens</button>
-						<button>Vendre des biens</button>
+						<Link to={ isLogged ? "/user" : "/login"}><button>Acheter des biens</button></Link>
+						<Link to={ isLogged ? "/user" : "/login"}><button>Vendre des biens</button></Link>
 					</div>
 				</div>
 			</div>
