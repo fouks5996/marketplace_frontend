@@ -1,6 +1,8 @@
 import Cookies from "js-cookie";
+import { useState } from 'react';
 
 function usePostForm(url, data, setLogged, current_user, navigate, path) {
+
 	fetch(url, {
 		method: "POST",
 		headers: {
@@ -10,19 +12,23 @@ function usePostForm(url, data, setLogged, current_user, navigate, path) {
 	})
 		.then((response) => {
 			console.log(response);
-			Cookies.set(
-				"token",
-				response.headers.get("Authorization").replace("Bearer ", "")
-			);
-
+				Cookies.set(
+					"token",
+					response.headers.get("Authorization").replace("Bearer ", "")
+				);
 			return response.json();
 		})
 		.then((res) => {
 			console.log(res);
-			current_user(res.user);
-			setLogged && setLogged(true);
-			navigate && navigate(path);
-		});
+			if (res !== undefined) {
+				current_user(res.user);
+				setLogged && setLogged(true);
+				navigate && navigate(path);
+			} 
+		})
+		.catch(error => {
+			alert("Erreur d'authentification.")
+		} )
 }
 
 export default usePostForm;

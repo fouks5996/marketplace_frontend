@@ -11,7 +11,7 @@ function Sendemail(props) {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
-				Accept: "application/json",
+				"Accept": "application/json",
 			},
 			body: JSON.stringify({ user: { email: e.target.email.value } }),
 		})

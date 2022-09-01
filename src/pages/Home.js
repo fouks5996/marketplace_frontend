@@ -1,4 +1,4 @@
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import React, { useEffect, useReducer, useState } from "react";
 import { logged } from "../components/atoms/logged";
 import { API } from "../utils/variables";
@@ -9,6 +9,7 @@ function Home(props) {
 	const [data, setData] = useState();
 	const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 	const isLogged = useAtomValue(logged);
+
 
 	useEffect(() => {
 		fetch(API + "articles")
