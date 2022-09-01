@@ -56,7 +56,7 @@ function Navigation(props) {
 					<NavLink
 						style={({ isActive }) => (isActive ? activeStyle : undefined)}
 						to='/user'>
-						Profil
+						Propriétaire
 					</NavLink>{" "}
 					<button className='py-2 px-4 bg-slate-800 text-white' onClick={reset}>
 						{" "}

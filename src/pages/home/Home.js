@@ -1,11 +1,13 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import React, { useEffect, useReducer, useState } from "react";
+
 import { logged } from "../../components/atoms/logged";
 import { API } from "../../utils/variables";
 import Article from "../../components/Article";
 import CreateArticle from "../../components/CreateArticle";
 import hero from "../../assets/images/hero.jpeg"
 import './home.scss'
+
 
 function Home(props) {
   const [data, setData] = useState();

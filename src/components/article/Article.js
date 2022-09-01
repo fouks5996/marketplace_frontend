@@ -2,11 +2,12 @@ import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { currentuser } from "./atoms/logged";
-import { errorMessageValues, errorInput, errorMessage } from "./auth/errors";
-import { API } from "../utils/variables";
-import { logged } from "../components/atoms/logged";
+import { currentuser } from "../atoms/logged";
+import { errorMessageValues, errorInput, errorMessage } from "../auth/errors";
+import { API } from "../../utils/variables";
+import { logged } from "../atoms/logged";
 import { Link } from "react-router-dom";
+import './article.scss';
 
 function Article({ article, allowEdit, forceUpdate }) {
 	const [editing, setEditing] = useState(false);
@@ -46,6 +47,7 @@ function Article({ article, allowEdit, forceUpdate }) {
 			})
 			.then((res) => {});
 	};
+
 
 	return (
 		<>
