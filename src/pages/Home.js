@@ -6,34 +6,37 @@ import Article from "../components/Article";
 import CreateArticle from "../components/CreateArticle";
 
 function Home(props) {
-	const [data, setData] = useState();
-	const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
-	const isLogged = useAtomValue(logged);
+  const [data, setData] = useState();
+  const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 
+  useEffect(() => {
+    fetch(API + "articles")
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        setData(res);
+      });
+  }, [setData, recucerValue]);
 
-	useEffect(() => {
-		fetch(API + "articles")
-			.then((response) => {
-				return response.json();
-			})
-			.then((res) => {
-				setData(res);
-			});
-	}, [setData, recucerValue]);
+  return (
+    <div>
+      <h1 className="text-3xl font-bold underline">Hello Home!</h1>
+      
 
-	return (
-		<div>
-			<h1 className='text-3xl font-bold underline'>Hello Home!</h1>
-			{isLogged && <CreateArticle forceUpdate={forceUpdate} />}
-
-			<div className='flex gap-2'>
-				{data &&
-					data.map((article) => (
-						<Article article={article} forceUpdate={forceUpdate} />
-					))}
-			</div>
-		</div>
-	);
+      <div className="flex gap-2">
+        {data &&
+          data.map((article) => (
+            <Article
+              key={article.id}
+              article={article}
+              forceUpdate={forceUpdate}
+              allowEdit={false}
+            />
+          ))}
+      </div>
+    </div>
+  );
 }
 
 export default Home;
