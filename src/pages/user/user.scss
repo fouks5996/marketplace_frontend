@@ -1,9 +1,12 @@
 #grid-container{
     // border: 3px solid red;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-items: center;
     align-items: center;
+    margin: 0px 100px;
+    margin-top: 50px;
+
 }
 
 #form-container{
@@ -13,6 +16,8 @@
     width: 25vw;
     box-shadow: 0px 0px 10px 1px #0f151e ;
     align-self: start;
+    position: sticky;
+    top: 50px;
 
     h1{
         background-color: #1e293b;
@@ -23,4 +28,16 @@
         padding: 5px;
         text-align: center;
     }
+}
+
+#beforeEl::after{
+    content:'';
+    width:100vw;
+    height:100vh;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index: -1;
+    background-color: #5c76a0;
+    opacity:0.5;
 }
