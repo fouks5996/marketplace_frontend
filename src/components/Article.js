@@ -3,15 +3,10 @@ import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { currentuser } from "./atoms/logged";
-import {
-	errorMessageValues,
-	errorInput,
-	errorMessage,
-} from "./auth/errors";
-
+import { errorMessageValues, errorInput, errorMessage } from "./auth/errors";
+import { API } from "../utils/variables";
 import { logged } from "../components/atoms/logged";
 import { Link } from "react-router-dom";
-
 
 function Article({ article, forceUpdate }) {
 	const [editing, setEditing] = useState(false);
@@ -27,7 +22,7 @@ function Article({ article, forceUpdate }) {
 	} = useForm();
 
 	const deleteArticle = (id) => {
-		fetch(`http://127.0.0.1:3000/articles/${id}`, {
+		fetch(`${API}/articles/${id}`, {
 			method: "DELETE",
 			headers: { Authorization: `Bearer ${token}` },
 		}).then((response) => {
@@ -36,7 +31,7 @@ function Article({ article, forceUpdate }) {
 	};
 
 	const onSubmit = (data) => {
-		fetch(`http://127.0.0.1:3000/articles/${article.id}`, {
+		fetch(`${API}/articles/${article.id}`, {
 			method: "PUT",
 			headers: {
 				"Content-type": "application/json",
@@ -52,16 +47,13 @@ function Article({ article, forceUpdate }) {
 			.then((res) => {});
 	};
 
-	const slugifyTitle = (title) => {
-		return title.replace(" ", "-").toLowerCase();
-		 
-	}
-
 	return (
 		<div className='border border-black w-fit p-4 '>
 			{!editing ? (
 				<>
-					<Link to ={`/show/${article.id}`}><h1> Titre : {article.title} </h1></Link>
+					<Link to={`/show/${article.id}`}>
+						<h1> Titre : {article.title} </h1>
+					</Link>
 					<h1 className='max-w-[250px]'>Content : {article.content}</h1>
 					<h1 className='max-w-[250px]'>prix : {article.price}</h1>
 				</>
@@ -109,8 +101,7 @@ function Article({ article, forceUpdate }) {
 						<button
 							className='py-2 px-4 rounded text-white bg-slate-800'
 							type='submit'>
-							{" "}
-							Submit{" "}
+							Submit
 						</button>
 					</form>
 				</>
@@ -118,7 +109,7 @@ function Article({ article, forceUpdate }) {
 
 			<h1> User : {article.user.email} </h1>
 
-			{(current_user.email === article.user.email && isLogged) && (
+			{current_user.email === article.user.email && isLogged && (
 				<>
 					<p
 						className='text-orange-500 cursor-pointer'
@@ -129,8 +120,7 @@ function Article({ article, forceUpdate }) {
 					<p
 						className='text-red-500 cursor-pointer'
 						onClick={() => deleteArticle(article.id)}>
-						{" "}
-						Supprimer{" "}
+						Supprimer
 					</p>
 				</>
 			)}

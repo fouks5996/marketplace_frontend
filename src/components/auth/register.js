@@ -19,7 +19,7 @@ function Form(props) {
 
 	const OnSubmit = (data) => {
 		usePostForm(
-			"http://127.0.0.1:3000/users",
+			API + "users",
 			data,
 			setLogged,
 			current_user,

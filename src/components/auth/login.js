@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { currentuser, logged } from "../atoms/logged";
 import { errorMessageValues, errorInput, errorMessage } from "./errors";
 import usePostForm from "./usePostForm";
+import { API } from "../../utils/variables";
 
 function FormLogin(props) {
 	const {
@@ -19,7 +20,7 @@ function FormLogin(props) {
 
 	const OnSubmit = (data) => {
 		usePostForm(
-			"http://127.0.0.1:3000/users/sign_in",
+			API + "users/sign_in",
 			data,
 			setLogged,
 			current_user,

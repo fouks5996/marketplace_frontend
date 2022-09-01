@@ -2,15 +2,15 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../hooks/useGet";
 import Cookies from "js-cookie";
+import { API } from "../utils/variables";
 
 function ArticleDetails() {
 	const articleId = useParams().articleId;
 
 	const [data, loading] = useFetch(
-		`http://localhost:3000/articles/${articleId}`,
+		`${API}/articles/${articleId}`,
 		Cookies.get("token")
 	);
-	console.log(data);
 
 	return (
 		<>

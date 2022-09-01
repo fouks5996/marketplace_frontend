@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { API } from "../utils/variables";
 
 function Sendemail(props) {
 	const [show, setShow] = useState(false);
-	const API_URL_RESET = "http://localhost:3000/users/password";
+	const API_URL_RESET = `${API}/users/password`;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

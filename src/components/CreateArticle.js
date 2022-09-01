@@ -6,7 +6,7 @@ import {
 	errorMessage,
 } from "../components/auth/errors";
 import Cookies from "js-cookie";
-const API = "http://127.0.0.1:3000/articles";
+import { API } from "../utils/variables";
 
 function CreateArticle({ forceUpdate }) {
 	const token = Cookies.get("token");
@@ -18,7 +18,7 @@ function CreateArticle({ forceUpdate }) {
 	} = useForm();
 
 	const onSubmit = (data) => {
-		fetch(API, {
+		fetch(API + "articles", {
 			method: "POST",
 			headers: {
 				"Content-type": "application/json",
