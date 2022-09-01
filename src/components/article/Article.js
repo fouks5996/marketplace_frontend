@@ -2,11 +2,12 @@ import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { currentuser } from "./atoms/logged";
-import { errorMessageValues, errorInput, errorMessage } from "./auth/errors";
-import { API } from "../utils/variables";
-import { logged } from "../components/atoms/logged";
+import { currentuser } from "../atoms/logged";
+import { errorMessageValues, errorInput, errorMessage } from "../auth/errors";
+import { API } from "../../utils/variables";
+import { logged } from "../atoms/logged";
 import { Link } from "react-router-dom";
+import './article.scss';
 
 function Article({ article, allowEdit, forceUpdate }) {
   const [editing, setEditing] = useState(false);
@@ -50,13 +51,14 @@ function Article({ article, allowEdit, forceUpdate }) {
   return (
     <div className="border border-black w-fit p-4 ">
       {!editing ? (
-        <>
+        <div className="card-container">
           <Link to={`/show/${article.id}`}>
             <h1> Titre : {article.title} </h1>
           </Link>
+          <img src="https://cdn.pixabay.com/photo/2015/05/23/01/15/tee-pee-780137_960_720.jpg" alt="bien immobilier"/>
           <h1 className="max-w-[250px]">Content : {article.content}</h1>
           <h1 className="max-w-[250px]">prix : {article.price}</h1>
-        </>
+        </div>
       ) : (
         <>
           <form
