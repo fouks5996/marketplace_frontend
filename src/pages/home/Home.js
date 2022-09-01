@@ -1,8 +1,11 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { API } from "../../utils/variables";
-import Article from "../../components/article/Article";
-import hero from "../../assets/images/hero.jpeg";
-import "./home.scss";
+
+import Article from '../../components/article/Article'
+import CreateArticle from "../../components/CreateArticle";
+import hero from "../../assets/images/hero.jpeg"
+import './home.scss'
+
 
 function Home(props) {
 	const [data, setData] = useState();

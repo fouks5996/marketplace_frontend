@@ -6,7 +6,7 @@ import Home from "./pages/home/Home";
 import ReinitPassword from "./pages/ReinitPassword";
 import Sendemail from "./pages/Sendemail";
 import User from "./pages/user/User";
-import ArticleDetails from "./pages/ArticleDetails";
+import ArticleDetails from "./pages/articleDetails/ArticleDetails";
 
 function App() {
 	return (
