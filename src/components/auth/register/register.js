@@ -1,10 +1,11 @@
 import { useSetAtom } from "jotai";
 import { useForm } from "react-hook-form";
-import { errorMessageValues, errorInput, errorMessage } from "./errors";
-import usePostForm from "./usePostForm";
-import { currentuser, logged } from "../atoms/logged";
+import { errorMessageValues, errorInput, errorMessage } from "../errors";
+import usePostForm from "../usePostForm";
+import { currentuser, logged } from "../../atoms/logged";
 import { useNavigate } from "react-router-dom";
-import { API } from "../../utils/variables";
+import { API } from "../../../utils/variables";
+import "../register/register.scss"
 
 function Form(props) {
 	const {
@@ -29,7 +30,7 @@ function Form(props) {
 	};
 
 	return (
-		<div className='mx-[200px] mt-10'>
+		<div className='form-container mx-[200px] mt-10'>
 			<h1 className='font-bold text-2xl'> S'inscrire </h1>
 			<form
 				className={`max-w-[400px] flex flex-col gap-3 mt-2`}
