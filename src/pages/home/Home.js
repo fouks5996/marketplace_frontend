@@ -1,9 +1,11 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import React, { useEffect, useReducer, useState } from "react";
-import { logged } from "../components/atoms/logged";
-import { API } from "../utils/variables";
-import Article from "../components/Article";
-import CreateArticle from "../components/CreateArticle";
+import { logged } from "../../components/atoms/logged";
+import { API } from "../../utils/variables";
+import Article from "../../components/Article";
+import CreateArticle from "../../components/CreateArticle";
+import hero from "../../assets/images/hero.jpeg"
+import './home.scss'
 
 function Home(props) {
   const [data, setData] = useState();
@@ -20,8 +22,17 @@ function Home(props) {
   }, [setData, recucerValue]);
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold underline">Hello Home!</h1>
+    <div className="home">
+      <div className="hero-container">
+        <div className="img-container">
+        <img src={hero} alt="" />
+        <h1>Bienvenue sur notre MarketPlace</h1>
+        <div className="btn-container">
+        <button>Acheter des biens</button>
+        <button>Vendre des biens</button>
+        </div>
+        </div>
+      </div>
       
 
       <div className="flex gap-2">
