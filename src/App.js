@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import FormLogin from "./components/auth/login";
 import Form from "./components/auth/register";
 import Layout from "./components/layout/Layout";
-import Home from "./pages/Home";
+import Home from "./pages/home/Home";
 import ReinitPassword from "./pages/ReinitPassword";
 import Sendemail from "./pages/Sendemail";
 import User from "./pages/User";
