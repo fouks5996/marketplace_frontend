@@ -3,7 +3,7 @@ import { API } from "../utils/variables";
 
 function Sendemail(props) {
 	const [show, setShow] = useState(false);
-	const API_URL_RESET = `${API}/users/password`;
+	const API_URL_RESET = `${API}users/password`;
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import ReinitPassword from "./pages/ReinitPassword";
 import Sendemail from "./pages/Sendemail";
 import User from "./pages/User";
-import ArticleDetails from './pages/ArticleDetails';
+import ArticleDetails from "./pages/ArticleDetails";
 
 function App() {
 	return (
@@ -16,9 +16,9 @@ function App() {
 				<Route path='/user' element={<User />} />
 				<Route path='/register' element={<Form />} />
 				<Route path='/sendemail' element={<Sendemail />} />
-				<Route path='/reinitialisation' element={<ReinitPassword />} />
+				<Route path='/new_password/:tokenId' element={<ReinitPassword />} />
 				<Route path='/login' element={<FormLogin />} />
-				<Route path='/show/:articleId' element={<ArticleDetails/>}/>
+				<Route path='/show/:articleId' element={<ArticleDetails />} />
 			</Routes>
 		</Layout>
 	);
