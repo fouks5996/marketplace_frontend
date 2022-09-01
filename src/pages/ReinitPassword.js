@@ -1,16 +1,18 @@
-import React, {useState } from "react";
-import { useParams, useNavigate } from 'react-router-dom';
-import { errorMessageValues, errorInput, errorMessage } from "../components/auth/errors";
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+	errorMessageValues,
+	errorInput,
+	errorMessage,
+} from "../components/auth/errors";
 import { API } from "../utils/variables";
 import { useForm } from "react-hook-form";
 
 function ReinitPassword(props) {
-
 	const token = useParams().tokenId;
-	console.log(token,typeof token)
+	console.log(token, typeof token);
 	const navigate = useNavigate();
 	const [show, setShow] = useState(false);
-	
 
 	const {
 		register,
@@ -18,38 +20,36 @@ function ReinitPassword(props) {
 		formState: { errors },
 	} = useForm();
 
-
 	const OnSubmit = (data) => {
-
 		fetch(API + "users/password", {
-			method : "PATCH",
+			method: "PATCH",
 			headers: {
 				"Content-Type": "application/json",
-				"Accept": "application/json",
+				Accept: "application/json",
 			},
 			body: JSON.stringify({
-									"user": {
-										"reset_password_token": token,
-										"password": data.password,
-										"password_confirmation": data.password_confirmation
-									}
-								})
+				user: {
+					reset_password_token: token,
+					password: data.password,
+					password_confirmation: data.password_confirmation,
+				},
+			}),
 		})
-		.then(response => response.json())
-		.then(data => {
-			console.log(data);
-			setShow(true);
-			setTimeout( () => {navigate('/login')}, "2000")
-			;
-		})
-		.catch(error => console.log(error.message))
-
-	}
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				setShow(true);
+				setTimeout(() => {
+					navigate("/login");
+				}, "2000");
+			})
+			.catch((error) => console.log(error.message));
+	};
 
 	return (
 		<>
-		<div>ReinitPassword</div>
-		<form
+			<div>ReinitPassword</div>
+			<form
 				className={`max-w-[400px] flex flex-col gap-3 mt-2`}
 				onSubmit={handleSubmit(OnSubmit)}>
 				<div className='flex flex-col'>
@@ -74,7 +74,7 @@ function ReinitPassword(props) {
 					/>
 					{errorMessage(errors.password)}
 				</div>
-				
+
 				<button
 					className='py-2 px-4 rounded text-white bg-slate-800'
 					type='submit'>
@@ -82,9 +82,14 @@ function ReinitPassword(props) {
 					Submit{" "}
 				</button>
 			</form>
-			{show && <h1 className='font-bold text-xl text-green-500'> Mot de passe modifié avec succès ! </h1>}
+			{show && (
+				<h1 className='font-bold text-xl text-green-500'>
+					{" "}
+					Mot de passe modifié avec succès !{" "}
+				</h1>
+			)}
 		</>
-	)
+	);
 }
 
 export default ReinitPassword;
