@@ -51,15 +51,15 @@ function Article({ article, allowEdit, forceUpdate }) {
 
 	useEffect(() => {
 		let card = {
-			distance: "14%",
+			distance: "10px",
 			origin: "bottom",
 			opacity: 0,
-			delay: 300,
-			interval: 150,
-			scale: 0.85,
+			delay: 0,
+			interval: 100,
+			scale: 0.95,
+			reset: true,
 		};
 		setAnimation(true);
-
 		ScrollReveal().reveal(".revealCard", card);
 	}, []);
 
