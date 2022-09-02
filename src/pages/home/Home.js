@@ -29,6 +29,7 @@ function Home(props) {
 			origin: "bottom",
 			opacity: 1,
 			duration: 300,
+			reset: true,
 			easing: "ease-in-out",
 		};
 
