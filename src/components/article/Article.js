@@ -115,6 +115,7 @@ function Article({ article, allowEdit, forceUpdate }) {
 								<div className='flex items-center justify-between gap-2'>
 									<p> Location </p>
 									<input
+										defaultValue={article.location}
 										className={`border h-10 pl-3 rounded-md  ${errorInput(
 											errors.location
 										)}`}
