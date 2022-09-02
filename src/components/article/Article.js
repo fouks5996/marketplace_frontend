@@ -63,7 +63,7 @@ function Article({ article, allowEdit, forceUpdate }) {
 		ScrollReveal().reveal(".revealCard", card);
 	}, []);
 
-	console.log('article', article)
+	// console.log('article', article.location)
 
 	return (
 		<>
