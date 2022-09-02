@@ -63,6 +63,8 @@ function Article({ article, allowEdit, forceUpdate }) {
 		ScrollReveal().reveal(".revealCard", card);
 	}, []);
 
+	console.log('article', article)
+
 	return (
 		<>
 			{editing && (
@@ -111,6 +113,17 @@ function Article({ article, allowEdit, forceUpdate }) {
 									/>
 									{errorMessage(errors.price)}
 								</div>
+								<div className='flex items-center justify-between gap-2'>
+									<p> Location </p>
+									<input
+										className={`border h-10 pl-3 rounded-md  ${errorInput(
+											errors.location
+										)}`}
+										type='text'
+										{...register("location", errorMessageValues.location)}
+									/>
+									{errorMessage(errors.location)}
+								</div>
 								<button
 									className='py-2 px-4 rounded text-white bg-slate-800 mt-4'
 									type='submit'>
@@ -139,6 +152,9 @@ function Article({ article, allowEdit, forceUpdate }) {
 					<span className='font-medium text-lg absolute top-5 left-5 bg-black text-white py-1 px-2 rounded'>
 						{article.price}€
 					</span>
+					{
+						article.location && <p>Location : {article.location}</p>
+					}
 				</>
 
 				{allowEdit ? (

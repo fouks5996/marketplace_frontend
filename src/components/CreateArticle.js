@@ -18,6 +18,7 @@ function CreateArticle({ forceUpdate }) {
 	} = useForm();
 
 	const onSubmit = (data) => {
+		console.log('data', data);
 		fetch(API + "articles", {
 			method: "POST",
 			headers: {
@@ -33,6 +34,7 @@ function CreateArticle({ forceUpdate }) {
 			.then((res) => {});
 	};
 
+	
 	return (
 		<>
 			<form
@@ -70,6 +72,17 @@ function CreateArticle({ forceUpdate }) {
 						{...register("price", errorMessageValues.price)}
 					/>
 					{errorMessage(errors.price)}
+				</div>
+				<div className='flex flex-col'>
+					<p> Location </p>
+					<input
+						className={`border h-10 pl-3 rounded-md  ${errorInput(
+							errors.location
+						)}`}
+						type='text'
+						{...register("location", errorMessageValues.location)}
+					/>
+					{errorMessage(errors.location)}
 				</div>
 				<button
 					className='py-2 px-4 rounded text-white bg-slate-800'

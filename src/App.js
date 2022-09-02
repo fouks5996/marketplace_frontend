@@ -7,6 +7,7 @@ import ReinitPassword from "./pages/ReinitPassword";
 import Sendemail from "./pages/Sendemail";
 import User from "./pages/user/User";
 import ArticleDetails from "./pages/articleDetails/ArticleDetails";
+import Map from "./pages/map/Map";
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				<Route path='/new_password/:tokenId' element={<ReinitPassword />} />
 				<Route path='/login' element={<FormLogin />} />
 				<Route path='/show/:articleId' element={<ArticleDetails />} />
+				<Route path="/map" element={<Map/>}/>
 			</Routes>
 		</Layout>
 	);
