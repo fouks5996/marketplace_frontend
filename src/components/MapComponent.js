@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "https://unpkg.com/leaflet@1.8.0/dist/leaflet.js";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "./MapComponent.css";
 import { API } from "../utils/variables";
 

@@ -57,7 +57,6 @@ function Article({ article, allowEdit, forceUpdate }) {
 			delay: 0,
 			interval: 100,
 			scale: 0.95,
-			reset: true,
 		};
 		setAnimation(true);
 		ScrollReveal().reveal(".revealCard", card);
