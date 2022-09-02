@@ -44,14 +44,17 @@ function Map(props) {
 				return response.json();
 			})
 			.then((res) => {
-				setData(
-						res.map(article => {
-							return (article.location.split(" ").pop());
-						}))
+
+				setData(cleanInput(res));
 			});
 			
 	}, [setData]);
 
+	const cleanInput = (res) => {
+		return [...new Set(res.map(article => {
+					return (article.location.split(" ").pop());
+				}))];
+	}
 	// console.log(mapCenter);
 	console.log(data);
 
