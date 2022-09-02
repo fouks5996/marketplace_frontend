@@ -63,7 +63,7 @@ function Article({ article, allowEdit, forceUpdate }) {
 		ScrollReveal().reveal(".revealCard", card);
 	}, []);
 
-	// console.log('article', article.location)
+	console.log("article", article);
 
 	return (
 		<>
@@ -152,9 +152,7 @@ function Article({ article, allowEdit, forceUpdate }) {
 					<span className='font-medium text-lg absolute top-5 left-5 bg-black text-white py-1 px-2 rounded'>
 						{article.price}€
 					</span>
-					{
-						article.location && <p>Location : {article.location}</p>
-					}
+					{article.location && <p>Location : {article.location}</p>}
 				</>
 
 				{allowEdit ? (
