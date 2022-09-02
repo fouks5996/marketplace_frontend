@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { API } from "../../utils/variables";
 import Article from "../../components/article/Article";
-import CreateArticle from "../../components/CreateArticle";
 import hero from "../../assets/images/hero.jpeg";
 import { Link } from "react-router-dom";
 import "./home.scss";
