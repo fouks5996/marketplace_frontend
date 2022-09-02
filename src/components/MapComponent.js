@@ -30,7 +30,11 @@ function MapComponent({ mapCenter, input }) {
 					.map((article) => (
 						<Marker position={[article.lat, article.lon]}>
 							<Popup>
-								A pretty CSS3 popup. <br /> Easily customizable.
+								<ul>
+									<li>{article.title}</li>
+									<li>{article.price} €</li>
+									<li>{article.user.email}</li>
+								</ul>
 							</Popup>
 						</Marker>
 					))}

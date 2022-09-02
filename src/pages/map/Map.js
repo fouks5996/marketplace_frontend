@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import "https://unpkg.com/leaflet@1.8.0/dist/leaflet.js";
 import {
@@ -7,11 +7,13 @@ import {
 	errorMessage,
 } from "../../components/auth/errors";
 import MapComponent from "../../components/MapComponent";
+import { API } from "../../utils/variables";
 
 function Map(props) {
 	const [mapCenter, setMapCenter] = useState([51.505, -0.09]);
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const [searchedCity, setSearchedCity] = useState("");
+	const [data, setData] = useState();
 
 	const {
 		register,
@@ -22,7 +24,7 @@ function Map(props) {
 	const OnSubmit = (input) => {
 		console.log(input.location);
 
-		setSearchedCity(input.location);
+		setSearchedCity((input.location).toLowerCase());
 
 		fetch(
 			`https://api.geoapify.com/v1/geocode/search?city=${input.location}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
@@ -36,7 +38,22 @@ function Map(props) {
 			.catch((err) => console.error(err));
 	};
 
+	useEffect(() => {
+		fetch(API + "articles")
+			.then((response) => {
+				return response.json();
+			})
+			.then((res) => {
+				setData(
+						res.map(article => {
+							return (article.location.split(" ").pop());
+						}))
+			});
+			
+	}, [setData]);
+
 	// console.log(mapCenter);
+	console.log(data);
 
 	return (
 		<div>
@@ -46,14 +63,23 @@ function Map(props) {
 				onSubmit={handleSubmit(OnSubmit)}>
 				<div className='flex flex-col'>
 					<p> Ville </p>
-					<input
+					{/* <input
 						className={`border h-10 pl-3 rounded-md  ${errorInput(
 							errors.location
 						)}`}
 						type='text'
 						{...register("location", errorMessageValues.location)}
 					/>
-					{errorMessage(errors.location)}
+					{errorMessage(errors.location)} */}
+
+					<select {...register("location", errorMessageValues.location)}>
+						<option>-- choisir une ville --</option>
+						{ 
+							data && data.map(location => (
+								<option value={location} >{location}</option>
+							))
+						}
+					</select>
 				</div>
 
 				<button
