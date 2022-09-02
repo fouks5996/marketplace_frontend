@@ -6,7 +6,6 @@ import {
 	errorInput,
 	errorMessage,
 } from "../../components/auth/errors";
-import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import MapComponent from "../../components/MapComponent";
 
 function Map(props) {
