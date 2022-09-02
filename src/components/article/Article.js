@@ -1,6 +1,6 @@
 import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { currentuser } from "../atoms/logged";
 import { errorMessageValues, errorInput, errorMessage } from "../auth/errors";
@@ -8,12 +8,13 @@ import { API } from "../../utils/variables";
 import { logged } from "../atoms/logged";
 import { Link } from "react-router-dom";
 import "./article.scss";
+import ScrollReveal from "scrollreveal";
 
 function Article({ article, allowEdit, forceUpdate }) {
 	const [editing, setEditing] = useState(false);
 	const current_user = useAtomValue(currentuser);
 	const token = Cookies.get("token");
-
+	const [animation, setAnimation] = useState(false);
 	const isLogged = useAtomValue(logged);
 
 	const {
@@ -47,6 +48,20 @@ function Article({ article, allowEdit, forceUpdate }) {
 			})
 			.then((res) => {});
 	};
+
+	useEffect(() => {
+		let card = {
+			distance: "14%",
+			origin: "bottom",
+			opacity: 0,
+			delay: 300,
+			interval: 150,
+			scale: 0.85,
+		};
+		setAnimation(true);
+
+		ScrollReveal().reveal(".revealCard", card);
+	}, []);
 
 	return (
 		<>
@@ -106,7 +121,10 @@ function Article({ article, allowEdit, forceUpdate }) {
 					</div>
 				</>
 			)}
-			<div className='border border-black w-fit p-2 rounded-xl relative'>
+			<div
+				className={`border border-black w-fit p-2 ${
+					!animation && "hidden"
+				} rounded-xl relative revealCard`}>
 				<img
 					alt=''
 					className=' rounded-lg mb-2 w-full max-h-[190px] max-w-[280px] min-w-[280px]'
