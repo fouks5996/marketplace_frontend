@@ -17,6 +17,34 @@ function CreateArticle({ forceUpdate }) {
 		formState: { errors },
 	} = useForm();
 
+	const updateCoordinate = (lat, lon, article) => {
+		fetch(`${API}articles/${article}`, {
+			method: "PUT",
+			headers: {
+				"Content-type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({ article: {
+				lat,
+				lon
+			} }),
+		})
+		.then((res) => res.json())
+		.then(data => {
+			console.log('updateCoordinate', data);
+		})
+	}
+
+	const getCoordinate = (city, article) => {
+		fetch(`https://api.geoapify.com/v1/geocode/search?text=${city}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`)
+		.then(response => response.json())
+		.then(data => {
+			 console.log('getCoordinate', data);
+			 updateCoordinate(data.results[0].lat, data.results[0].lon, article)
+		})
+		.catch(err => console.error(err));
+	}
+
 	const onSubmit = (data) => {
 		console.log('data', data);
 		fetch(API + "articles", {
@@ -31,7 +59,10 @@ function CreateArticle({ forceUpdate }) {
 				forceUpdate();
 				return response.json();
 			})
-			.then((res) => {});
+			.then((res) => {
+				console.log(res);
+				getCoordinate(res.location, res.id)
+			});
 	};
 
 	
