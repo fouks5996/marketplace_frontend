@@ -72,6 +72,14 @@ export const errorMessageValues = {
 		},
 	},
 
+	location: {
+		required: "L'adresse est requise",
+		// pattern: {
+		// 	value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+		// 	message: "L'email que vous avez saisi n'est pas valide",
+		// },
+	},
+
 	password: {
 		required: "Le mot de passe est requis",
 		// pattern: {

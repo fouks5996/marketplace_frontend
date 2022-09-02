@@ -37,6 +37,12 @@ function Navigation(props) {
 				Home
 			</NavLink>
 
+			<NavLink
+				style={({ isActive }) => (isActive ? activeStyle : undefined)}
+				to='/map'>
+				Carte interactive
+			</NavLink>
+
 			{!loggedd ? (
 				<>
 					{" "}
