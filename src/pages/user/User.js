@@ -6,6 +6,7 @@ import { logged } from "../../components/atoms/logged";
 import CreateArticle from "../../components/CreateArticle";
 import { API } from "../../utils/variables";
 import "./user.scss";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 function User(props) {
 	const token = Cookies.get("token");
@@ -13,6 +14,7 @@ function User(props) {
 	const loggedd = useAtomValue(logged);
 	const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
 	const isLogged = useAtomValue(logged);
+	const [parent] = useAutoAnimate(/* optional config */);
 
 	useEffect(() => {
 		loggedd &&
@@ -42,7 +44,7 @@ function User(props) {
 							</div>
 						)}
 
-						<div className='flex gap-8 flex-wrap'>
+						<div className='flex gap-8 flex-wrap' ref={parent}>
 							{data.articles.map((item) => (
 								<Article
 									key={item.id}
