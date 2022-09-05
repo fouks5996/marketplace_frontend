@@ -103,6 +103,17 @@ function CreateArticle({ forceUpdate }) {
 					{errorMessage(errors.price)}
 				</div>
 				<div className='flex flex-col'>
+					<p> Autres charges </p>
+					<input
+						className={`border h-10 pl-3 rounded-md  ${errorInput(
+							errors.otherCharges
+						)}`}
+						type='number'
+						{...register("other_charges", errorMessageValues.otherCharges)}
+					/>
+					{errorMessage(errors.price)}
+				</div>
+				<div className='flex flex-col'>
 					<p> Location </p>
 					<input
 						className={`border h-10 pl-3 rounded-md  ${errorInput(
@@ -112,6 +123,38 @@ function CreateArticle({ forceUpdate }) {
 						{...register("location", errorMessageValues.location)}
 					/>
 					{errorMessage(errors.location)}
+				</div>
+				<div className='flex items-center gap-2'>
+					<input type="checkbox"					
+						className={`border h-10 pl-3 rounded-md  ${errorInput(
+							errors.furnished
+						)}`}
+						{...register("furnished", errorMessageValues.furnished)}
+					/>
+					<p> Meublé </p>
+					{errorMessage(errors.furnished)}
+				</div>
+				<div className='flex items-center gap-2'>
+					<input type="checkbox"					
+						className={`border h-10 pl-3 rounded-md  ${errorInput(
+							errors.includedCharges
+						)}`}
+						{...register("included_charges", errorMessageValues.includedCharges)}
+					/>
+					<p> Charges comprises </p>
+					{errorMessage(errors.includedCharges)}
+				</div>
+				
+				<div className='flex flex-col'>
+					<p> Surface </p>
+					<input
+						className={`border h-10 pl-3 rounded-md  ${errorInput(
+							errors.surface
+						)}`}
+						type='number'
+						{...register("surface", errorMessageValues.surface)}
+					/>
+					{errorMessage(errors.surface)}
 				</div>
 				<button
 					className='py-2 px-4 rounded text-white bg-slate-800'

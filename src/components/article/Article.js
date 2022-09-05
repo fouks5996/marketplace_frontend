@@ -9,6 +9,7 @@ import { logged } from "../atoms/logged";
 import { Link } from "react-router-dom";
 import "./article.scss";
 import ScrollReveal from "scrollreveal";
+import ArticleTags from "./ArticleTags";
 
 function Article({ article, allowEdit, forceUpdate }) {
 	const [editing, setEditing] = useState(false);
@@ -110,6 +111,18 @@ function Article({ article, allowEdit, forceUpdate }) {
 									/>
 									{errorMessage(errors.price)}
 								</div>
+								<div className='flex flex-col'>
+									<p> Autres charges </p>
+									<input
+										defaultValue={article.other_charges}
+										className={`border h-10 pl-3 rounded-md  ${errorInput(
+											errors.otherCharges
+										)}`}
+										type='number'
+										{...register("other_charges", errorMessageValues.otherCharges)}
+									/>
+									{errorMessage(errors.price)}
+								</div>
 								<div className='flex items-center justify-between gap-2'>
 									<p> Location </p>
 									<input
@@ -121,6 +134,41 @@ function Article({ article, allowEdit, forceUpdate }) {
 										{...register("location", errorMessageValues.location)}
 									/>
 									{errorMessage(errors.location)}
+								</div>
+								<div className='flex items-center gap-2'>
+									<input type="checkbox"	
+										defaultChecked={article.furnished}				
+										className={`border h-10 pl-3 rounded-md  ${errorInput(
+											errors.furnished
+										)}`}
+										{...register("furnished", errorMessageValues.furnished)}
+									/>
+									<p> Meublé </p>
+									{errorMessage(errors.furnished)}
+								</div>
+								<div className='flex items-center gap-2'>
+									<input type="checkbox"
+										defaultChecked={article.included_charges}					
+										className={`border h-10 pl-3 rounded-md  ${errorInput(
+											errors.includedCharges
+										)}`}
+										{...register("included_charges", errorMessageValues.includedCharges)}
+									/>
+									<p> Charges comprises </p>
+									{errorMessage(errors.includedCharges)}
+								</div>
+								
+								<div className='flex flex-col'>
+									<p> Surface </p>
+									<input
+										defaultValue={article.surface}
+										className={`border h-10 pl-3 rounded-md  ${errorInput(
+											errors.surface
+										)}`}
+										type='number'
+										{...register("surface", errorMessageValues.surface)}
+									/>
+									{errorMessage(errors.surface)}
 								</div>
 								<button
 									className='py-2 px-4 rounded text-white bg-slate-800 mt-4'
@@ -146,9 +194,17 @@ function Article({ article, allowEdit, forceUpdate }) {
 					<Link to={`/show/${article.id}`}>
 						<h1 className='text-2xl font-bold'>{article.title}</h1>
 					</Link>
+					<div className="flex gap-2">
+						<ArticleTags article={article.furnished} bgColor="bg-blue-500" ifTrue="meublé" ifFalse="non-meublé"/>
+						<ArticleTags article={article.included_charges} bgColor="bg-red-500" ifTrue="cc" ifFalse="cnc"/>	
+						<ArticleTags article={article.surface} bgColor="bg-purple-500" ifTrue={`${article.surface} m²`}/>
+					</div>
 					<h1 className='max-w-[250px]'> {article.content}</h1>
 					<span className='font-medium text-lg absolute top-5 left-5 bg-black text-white py-1 px-2 rounded'>
 						{article.price}€
+					</span>
+					<span className='font-medium text-xs absolute top-5 right-5 bg-black text-white py-1 px-2 rounded'>
+						autres charges : {article.other_charges}€
 					</span>
 					{article.location && <p>Location : {article.location}</p>}
 				</>
