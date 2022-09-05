@@ -125,7 +125,8 @@ function CreateArticle({ forceUpdate }) {
 					{errorMessage(errors.location)}
 				</div>
 				<div className='flex items-center gap-2'>
-					<input type="checkbox"					
+					<input
+						type='checkbox'
 						className={`border h-10 pl-3 rounded-md  ${errorInput(
 							errors.furnished
 						)}`}
@@ -135,16 +136,20 @@ function CreateArticle({ forceUpdate }) {
 					{errorMessage(errors.furnished)}
 				</div>
 				<div className='flex items-center gap-2'>
-					<input type="checkbox"					
+					<input
+						type='checkbox'
 						className={`border h-10 pl-3 rounded-md  ${errorInput(
 							errors.includedCharges
 						)}`}
-						{...register("included_charges", errorMessageValues.includedCharges)}
+						{...register(
+							"included_charges",
+							errorMessageValues.includedCharges
+						)}
 					/>
 					<p> Charges comprises </p>
 					{errorMessage(errors.includedCharges)}
 				</div>
-				
+
 				<div className='flex flex-col'>
 					<p> Surface </p>
 					<input
