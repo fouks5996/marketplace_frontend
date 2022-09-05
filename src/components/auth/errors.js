@@ -87,4 +87,11 @@ export const errorMessageValues = {
 		// 	message: "Le mot de passe doit contenir au moins 1 majuscule",
 		// },
 	},
+	surface: {
+		required: "La superficie du bien est requise.",
+		min: {
+			value: 9,
+			message: "La surface minimale est de 9m².",
+		}
+	}
 };

@@ -8,6 +8,7 @@ import { logged } from "../../components/atoms/logged";
 import { useAtomValue } from "jotai";
 import ScrollReveal from "scrollreveal";
 
+
 function Home(props) {
 	const [data, setData] = useState();
 	const [recucerValue, forceUpdate] = useReducer((x) => x + 1, 0);
