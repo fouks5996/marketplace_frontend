@@ -6,81 +6,83 @@ import MapComponent from "../../components/MapComponent";
 import { API } from "../../utils/variables";
 
 function Map(props) {
-	const [mapCenter, setMapCenter] = useState([51.505, -0.09]);
-	const [modalVisibility, setModalVisibility] = useState(false);
-	const [searchedCity, setSearchedCity] = useState("");
-	const [data, setData] = useState();
-	const { register, handleSubmit } = useForm();
+  const [mapCenter, setMapCenter] = useState([51.505, -0.09]);
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const [searchedCity, setSearchedCity] = useState("");
+  const [data, setData] = useState();
+  const { register, handleSubmit } = useForm();
 
-	const OnSubmit = (input) => {
-		setSearchedCity(input.location.toLowerCase());
-		fetch(
-			`https://api.geoapify.com/v1/geocode/search?city=${input.location}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-		)
-			.then((response) => response.json())
-			.then((data) => {
-				setMapCenter([data.results[0].lat, data.results[0].lon]);
-				setModalVisibility(true);
-			})
-			.catch((err) => console.error(err));
-	};
+  const OnSubmit = (input) => {
+    setSearchedCity(input.location.toLowerCase());
+    fetch(
+      `https://api.geoapify.com/v1/geocode/search?city=${input.location}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setMapCenter([data.results[0].lat, data.results[0].lon]);
+        setModalVisibility(true);
+      })
+      .catch((err) => console.error(err));
+  };
 
-	useEffect(() => {
-		fetch(API + "articles")
-			.then((response) => {
-				return response.json();
-			})
-			.then((res) => {
-				setData(cleanInput(res));
-			});
-	}, [setData]);
+  useEffect(() => {
+    fetch(API + "articles")
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        setData(cleanInput(res));
+      });
+  }, [setData]);
 
-	const cleanInput = (res) => {
-		return [
-			...new Set(
-				res.map((article) => {
-					return article.location.split(" ").pop();
-				})
-			),
-		];
-	};
+  const cleanInput = (res) => {
+    return [
+      ...new Set(
+        res.map((article) => {
+          return article.location.split(" ").pop();
+        })
+      ),
+    ];
+  };
 
-	return (
-		<div>
-			<h1>Chercher les biens par ville</h1>
-			<form
-				className={`max-w-[400px] flex flex-col gap-3 mt-2`}
-				onSubmit={handleSubmit(OnSubmit)}>
-				<div className='flex flex-col'>
-					<p> Ville </p>
+  return (
+    <div>
+      <h1>Chercher les biens par ville</h1>
 
-					<select {...register("location", errorMessageValues.location)}>
-						<option>-- choisir une ville --</option>
-						{data &&
-							data.map((location) => (
-								<option value={location}>{location}</option>
-							))}
-					</select>
-				</div>
+      <form
+        className={`max-w-[400px] flex flex-col gap-3 mt-2`}
+        onSubmit={handleSubmit(OnSubmit)}
+      >
+        <div className="flex flex-col">
+          <p> Ville </p>
 
-				<button
-					className='py-2 px-4 rounded text-white bg-slate-800'
-					type='submit'>
-					{" "}
-					Submit{" "}
-				</button>
-			</form>
+          <select {...register("location", errorMessageValues.location)}>
+            <option>-- choisir une ville --</option>
+            {data &&
+              data.map((location) => (
+                <option value={location}>{location}</option>
+              ))}
+          </select>
+        </div>
 
-			<div className=''>
-				{modalVisibility && (
-					<div>
-						<button onClick={() => setModalVisibility(false)}>Fermer</button>
-						<MapComponent mapCenter={mapCenter} input={searchedCity} />
-					</div>
-				)}
-			</div>
-		</div>
-	);
+        <button
+          className="py-2 px-4 rounded text-white bg-slate-800"
+          type="submit"
+        >
+          {" "}
+          Submit{" "}
+        </button>
+      </form>
+      <div className="">
+        {modalVisibility && (
+          <div>
+            <button onClick={() => setModalVisibility(false)}>Fermer</button>
+            <MapComponent mapCenter={mapCenter} input={searchedCity} />
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Map;
