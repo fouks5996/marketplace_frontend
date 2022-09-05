@@ -50,19 +50,6 @@ function Article({ article, allowEdit, forceUpdate }) {
 			.then((res) => {});
 	};
 
-	useEffect(() => {
-		let card = {
-			distance: "10px",
-			origin: "bottom",
-			opacity: 0,
-			delay: 0,
-			interval: 100,
-			scale: 0.95,
-		};
-		setAnimation(true);
-		ScrollReveal().reveal(".revealCard", card);
-	}, []);
-
 	return (
 		<>
 			{editing && (
@@ -119,7 +106,10 @@ function Article({ article, allowEdit, forceUpdate }) {
 											errors.otherCharges
 										)}`}
 										type='number'
-										{...register("other_charges", errorMessageValues.otherCharges)}
+										{...register(
+											"other_charges",
+											errorMessageValues.otherCharges
+										)}
 									/>
 									{errorMessage(errors.price)}
 								</div>
@@ -136,8 +126,9 @@ function Article({ article, allowEdit, forceUpdate }) {
 									{errorMessage(errors.location)}
 								</div>
 								<div className='flex items-center gap-2'>
-									<input type="checkbox"	
-										defaultChecked={article.furnished}				
+									<input
+										type='checkbox'
+										defaultChecked={article.furnished}
 										className={`border h-10 pl-3 rounded-md  ${errorInput(
 											errors.furnished
 										)}`}
@@ -147,17 +138,21 @@ function Article({ article, allowEdit, forceUpdate }) {
 									{errorMessage(errors.furnished)}
 								</div>
 								<div className='flex items-center gap-2'>
-									<input type="checkbox"
-										defaultChecked={article.included_charges}					
+									<input
+										type='checkbox'
+										defaultChecked={article.included_charges}
 										className={`border h-10 pl-3 rounded-md  ${errorInput(
 											errors.includedCharges
 										)}`}
-										{...register("included_charges", errorMessageValues.includedCharges)}
+										{...register(
+											"included_charges",
+											errorMessageValues.includedCharges
+										)}
 									/>
 									<p> Charges comprises </p>
 									{errorMessage(errors.includedCharges)}
 								</div>
-								
+
 								<div className='flex flex-col'>
 									<p> Surface </p>
 									<input
@@ -180,10 +175,7 @@ function Article({ article, allowEdit, forceUpdate }) {
 					</div>
 				</>
 			)}
-			<div
-				className={`border border-black w-fit p-2 ${
-					!animation && "hidden"
-				} rounded-xl relative revealCard`}>
+			<div className={`border border-black w-fit p-2  rounded-xl relative`}>
 				<img
 					alt=''
 					className=' rounded-lg mb-2 w-full max-h-[190px] max-w-[280px] min-w-[280px]'
@@ -194,10 +186,24 @@ function Article({ article, allowEdit, forceUpdate }) {
 					<Link to={`/show/${article.id}`}>
 						<h1 className='text-2xl font-bold'>{article.title}</h1>
 					</Link>
-					<div className="flex gap-2">
-						<ArticleTags article={article.furnished} bgColor="bg-blue-500" ifTrue="meublé" ifFalse="non-meublé"/>
-						<ArticleTags article={article.included_charges} bgColor="bg-red-500" ifTrue="cc" ifFalse="cnc"/>	
-						<ArticleTags article={article.surface} bgColor="bg-purple-500" ifTrue={`${article.surface} m²`}/>
+					<div className='flex gap-2'>
+						<ArticleTags
+							article={article.furnished}
+							bgColor='bg-blue-500'
+							ifTrue='meublé'
+							ifFalse='non-meublé'
+						/>
+						<ArticleTags
+							article={article.included_charges}
+							bgColor='bg-red-500'
+							ifTrue='cc'
+							ifFalse='cnc'
+						/>
+						<ArticleTags
+							article={article.surface}
+							bgColor='bg-purple-500'
+							ifTrue={`${article.surface} m²`}
+						/>
 					</div>
 					<h1 className='max-w-[250px]'> {article.content}</h1>
 					<span className='font-medium text-lg absolute top-5 left-5 bg-black text-white py-1 px-2 rounded'>
