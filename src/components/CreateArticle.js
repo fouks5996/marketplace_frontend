@@ -24,29 +24,29 @@ function CreateArticle({ forceUpdate }) {
 				"Content-type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
-			body: JSON.stringify({ article: {
-				lat,
-				lon
-			} }),
+			body: JSON.stringify({
+				article: {
+					lat,
+					lon,
+				},
+			}),
 		})
-		.then((res) => res.json())
-		.then(data => {
-			console.log('updateCoordinate', data);
-		})
-	}
+			.then((res) => res.json())
+			.then((data) => {});
+	};
 
-	const getCoordinate = (city, article) => {
-		fetch(`https://api.geoapify.com/v1/geocode/search?text=${city}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`)
-		.then(response => response.json())
-		.then(data => {
-			 console.log('getCoordinate', data);
-			 updateCoordinate(data.results[0].lat, data.results[0].lon, article)
-		})
-		.catch(err => console.error(err));
-	}
+	const getCoordinate = (location, articleId) => {
+		fetch(
+			`https://api.geoapify.com/v1/geocode/search?text=${location}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
+		)
+			.then((response) => response.json())
+			.then((data) => {
+				updateCoordinate(data.results[0].lat, data.results[0].lon, articleId);
+			})
+			.catch((err) => console.error(err));
+	};
 
 	const onSubmit = (data) => {
-		console.log('data', data);
 		fetch(API + "articles", {
 			method: "POST",
 			headers: {
@@ -60,12 +60,10 @@ function CreateArticle({ forceUpdate }) {
 				return response.json();
 			})
 			.then((res) => {
-				console.log(res);
-				getCoordinate(res.location, res.id)
+				getCoordinate(res.location, res.id);
 			});
 	};
 
-	
 	return (
 		<>
 			<form
