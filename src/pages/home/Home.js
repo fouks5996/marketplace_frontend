@@ -32,7 +32,6 @@ function Home(props) {
 			reset: true,
 			easing: "ease-in-out",
 		};
-
 		ScrollReveal().reveal(".reveal", slideUp);
 	}, []);
 
