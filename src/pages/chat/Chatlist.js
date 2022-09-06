@@ -5,10 +5,10 @@ import { currentuser } from "../../components/atoms/logged";
 import { useAtomValue } from "jotai";
 import ChatDetails from "./ChatDetails";
 
-
 function Chatlist() {
 	const token = Cookies.get("token");
 	const [chatterList, setChatterList] = useState();
+	const [currentMessage, setCurrentMessage] = useState(false);
 	const currentUser = useAtomValue(currentuser);
 
 	useEffect(() => {
@@ -30,34 +30,20 @@ function Chatlist() {
 					(message) => message.sender_id !== message.recipient_id
 				);
 
-				console.log(data);
 				setSender(filtered);
 			});
 	}, []);
 
-	function dataParsed(date) {
-		return new Date(date).toLocaleDateString("fr-FR", {
-			month: "short",
-			weekday: "long",
-			year: "numeric",
-			day: "numeric",
-			hour: "numeric",
-			second: "numeric",
-		});
-	}
-
 	const setSender = (dataTofilter) => {
 		let senderArray = [];
-		console.log(dataTofilter);
 		dataTofilter.map((data) => {
 			return senderArray.push({
 				user: data.sender.email,
 				message: data.content,
 				date: data.created_at,
-				id: data.sender_id
+				id: data.sender_id,
 			});
 		});
-		console.log("sendmessage", senderArray);
 		return setRecipient(dataTofilter, senderArray);
 	};
 
@@ -68,10 +54,9 @@ function Chatlist() {
 				user: data.recipient.email,
 				message: data.content,
 				date: data.created_at,
-				id: data.recipient_id
+				id: data.recipient_id,
 			});
 		});
-		console.log("receive message", recipientArray);
 		return mergeArrays(senderArray, recipientArray);
 	};
 
@@ -81,25 +66,23 @@ function Chatlist() {
 			.filter((el) => {
 				return el.user !== currentUser.email;
 			})
-			// .sort((a, b) => Number(b.date) - Number(a.date))
 			.filter((v, i, a) => a.findIndex((t) => t.user === v.user) === i);
-		console.log(mergedArray);
 		return setChatterList(mergedArray);
 	};
 
+	console.log(currentMessage);
+
 	return (
-		<div className="relative">
+		<div className='relative'>
 			<h1>Liste des conversations :</h1>
 			{chatterList &&
 				chatterList.map((data) => (
 					<div className='border-b border-gray mb-4 w-fit'>
-			
-					<ChatDetails
-					data={data}
-					/>
-
-					
-				
+						<ChatDetails
+							data={data}
+							setCurrentMessage={setCurrentMessage}
+							currentMessage={currentMessage}
+						/>
 					</div>
 				))}
 		</div>
