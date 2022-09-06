@@ -3,6 +3,8 @@ import { API } from "../../utils/variables";
 import Cookies from "js-cookie";
 import { currentuser } from "../../components/atoms/logged";
 import { useAtomValue } from "jotai";
+import ChatDetails from "./ChatDetails";
+
 
 function Chatlist() {
 	const token = Cookies.get("token");
@@ -52,6 +54,7 @@ function Chatlist() {
 				user: data.sender.email,
 				message: data.content,
 				date: data.created_at,
+				id: data.sender_id
 			});
 		});
 		console.log("sendmessage", senderArray);
@@ -65,6 +68,7 @@ function Chatlist() {
 				user: data.recipient.email,
 				message: data.content,
 				date: data.created_at,
+				id: data.recipient_id
 			});
 		});
 		console.log("receive message", recipientArray);
@@ -77,21 +81,25 @@ function Chatlist() {
 			.filter((el) => {
 				return el.user !== currentUser.email;
 			})
-			.sort((a, b) => Number(b.date) - Number(a.date))
+			// .sort((a, b) => Number(b.date) - Number(a.date))
 			.filter((v, i, a) => a.findIndex((t) => t.user === v.user) === i);
 		console.log(mergedArray);
 		return setChatterList(mergedArray);
 	};
 
 	return (
-		<div>
+		<div className="relative">
 			<h1>Liste des conversations :</h1>
 			{chatterList &&
 				chatterList.map((data) => (
-					<div className='border-b border-black'>
-						<p> user : {data.user}</p>
-						<p> message : {data.message}</p>
-						<p> date : {data.date}</p>
+					<div className='border-b border-gray mb-4 w-fit'>
+			
+					<ChatDetails
+					data={data}
+					/>
+
+					
+				
 					</div>
 				))}
 		</div>
