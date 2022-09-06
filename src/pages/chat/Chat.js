@@ -6,7 +6,6 @@ function Chat(props) {
     return (
         <div>
             <Chatlist/>
-            <ChatDetails/>
         </div>
     );
 }
