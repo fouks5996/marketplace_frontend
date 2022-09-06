@@ -50,6 +50,10 @@ function Article({ article, allowEdit, forceUpdate }) {
 			.then((res) => {});
 	};
 
+	function shortedString(string, length) {
+		return string.substr(0, length) + "...";
+	}
+
 	return (
 		<>
 			{editing && (
@@ -184,9 +188,11 @@ function Article({ article, allowEdit, forceUpdate }) {
 
 				<>
 					<Link to={`/show/${article.id}`}>
-						<h1 className='text-2xl font-bold'>{article.title}</h1>
+						<h1 className='text-2xl font-bold max-w-[250px]'>
+							{article.title}
+						</h1>
 					</Link>
-					<div className='flex gap-2'>
+					<div className='flex gap-2 my-2'>
 						<ArticleTags
 							article={article.furnished}
 							bgColor='bg-blue-500'
@@ -205,14 +211,19 @@ function Article({ article, allowEdit, forceUpdate }) {
 							ifTrue={`${article.surface} m²`}
 						/>
 					</div>
-					<h1 className='max-w-[250px]'> {article.content}</h1>
+					<h1 className='max-w-[250px]'>
+						{" "}
+						{shortedString(article.content, 70)}
+					</h1>
 					<span className='font-medium text-lg absolute top-5 left-5 bg-black text-white py-1 px-2 rounded'>
 						{article.price}€
 					</span>
 					<span className='font-medium text-xs absolute top-5 right-5 bg-black text-white py-1 px-2 rounded'>
 						autres charges : {article.other_charges}€
 					</span>
-					{article.location && <p>Location : {article.location}</p>}
+					{article.location && (
+						<p className='max-w-[250px]'>Location : {article.location}</p>
+					)}
 				</>
 
 				{allowEdit ? (
@@ -233,7 +244,7 @@ function Article({ article, allowEdit, forceUpdate }) {
 						</div>
 					)
 				) : (
-					<h1> User : {article.user.email} </h1>
+					<h1 className='underline mt-2'> User : {article.user.email} </h1>
 				)}
 			</div>
 		</>
