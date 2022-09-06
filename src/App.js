@@ -8,6 +8,7 @@ import Sendemail from "./pages/Sendemail";
 import User from "./pages/user/User";
 import ArticleDetails from "./pages/articleDetails/ArticleDetails";
 import Map from "./pages/map/Map";
+import Chat from "./pages/chat/Chat";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
 					<Route path='/login' element={<FormLogin />} />
 					<Route path='/show/:articleId' element={<ArticleDetails />} />
 					<Route path="/map" element={<Map/>}/>
+					<Route path="/user/chat" element={<Chat/>}/>
 				</Routes>
 			</Layout>
 
