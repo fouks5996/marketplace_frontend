@@ -7,6 +7,7 @@ import {
 } from "../components/auth/errors";
 import Cookies from "js-cookie";
 import { API } from "../utils/variables";
+import { getCoordinate } from "./functions/getCoordinates";
 
 function CreateArticle({ forceUpdate }) {
 	const token = Cookies.get("token");
@@ -17,34 +18,34 @@ function CreateArticle({ forceUpdate }) {
 		formState: { errors },
 	} = useForm();
 
-	const updateCoordinate = (lat, lon, article) => {
-		fetch(`${API}articles/${article}`, {
-			method: "PUT",
-			headers: {
-				"Content-type": "application/json",
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				article: {
-					lat,
-					lon,
-				},
-			}),
-		})
-			.then((res) => res.json())
-			.then((data) => {});
-	};
+	// const updateCoordinate = (lat, lon, article) => {
+	// 	fetch(`${API}articles/${article}`, {
+	// 		method: "PUT",
+	// 		headers: {
+	// 			"Content-type": "application/json",
+	// 			Authorization: `Bearer ${token}`,
+	// 		},
+	// 		body: JSON.stringify({
+	// 			article: {
+	// 				lat,
+	// 				lon,
+	// 			},
+	// 		}),
+	// 	})
+	// 		.then((res) => res.json())
+	// 		.then((data) => {});
+	// };
 
-	const getCoordinate = (location, articleId) => {
-		fetch(
-			`https://api.geoapify.com/v1/geocode/search?text=${location}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
-		)
-			.then((response) => response.json())
-			.then((data) => {
-				updateCoordinate(data.results[0].lat, data.results[0].lon, articleId);
-			})
-			.catch((err) => console.error(err));
-	};
+	// const getCoordinate = (location, articleId) => {
+	// 	fetch(
+	// 		`https://api.geoapify.com/v1/geocode/search?text=${location}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
+	// 	)
+	// 		.then((response) => response.json())
+	// 		.then((data) => {
+	// 			updateCoordinate(data.results[0].lat, data.results[0].lon, articleId);
+	// 		})
+	// 		.catch((err) => console.error(err));
+	// };
 
 	const onSubmit = (data) => {
 		fetch(API + "articles", {
@@ -62,6 +63,7 @@ function CreateArticle({ forceUpdate }) {
 			.then((res) => {
 				getCoordinate(res.location, res.id);
 			});
+			
 	};
 
 	return (
