@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai";
 import Cookies from "js-cookie";
 import React, { useEffect, useReducer, useState } from "react";
+import { Link } from "react-router-dom";
 import Article from "../../components/article/Article";
 import { logged } from "../../components/atoms/logged";
 import CreateArticle from "../../components/CreateArticle";
