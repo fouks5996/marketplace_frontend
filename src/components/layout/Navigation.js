@@ -64,6 +64,11 @@ function Navigation(props) {
 						to='/user'>
 						Propriétaire
 					</NavLink>{" "}
+					<NavLink
+						style={({ isActive }) => (isActive ? activeStyle : undefined)}
+						to='/user/chat'>
+						Message
+					</NavLink>{" "}
 					<button className='py-2 px-4 bg-slate-800 text-white' onClick={reset}>
 						{" "}
 						Déconnexion{" "}
