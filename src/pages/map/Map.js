@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useReducer } from "react";
 import { useForm } from "react-hook-form";
 import "https://unpkg.com/leaflet@1.8.0/dist/leaflet.js";
 import { errorMessageValues } from "../../components/auth/errors";
-import MapComponent from "../../components/MapComponent";
+import MapComponent from "../../components/map_components/MapComponent";
 import { API } from "../../utils/variables";
+
 
 function Map(props) {
 	const [mapCenter, setMapCenter] = useState([51.505, -0.09]);
@@ -11,6 +12,7 @@ function Map(props) {
 	const [searchedCity, setSearchedCity] = useState("");
 	const [data, setData] = useState();
 	const { register, handleSubmit } = useForm();
+
 
 	const OnSubmit = (input) => {
 		setSearchedCity(input.location.toLowerCase());
@@ -33,7 +35,7 @@ function Map(props) {
 			.then((res) => {
 				setData(cleanInput(res));
 			});
-	}, [setData]);
+	}, [setData, mapCenter]);
 
 	const cleanInput = (res) => {
 		return [
@@ -68,10 +70,12 @@ function Map(props) {
 
 				<button
 					className='py-2 px-4 rounded text-white bg-slate-800'
-					type='submit'>
+					type='submit'
+					>
 					{" "}
 					Chercher{" "}
 				</button>
+				
 			</form>
 			<div className='mx-[150px]'>
 				{modalVisibility && (

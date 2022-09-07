@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "https://unpkg.com/leaflet@1.8.0/dist/leaflet.js";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import "./MapComponent.css";
-import { API } from "../utils/variables";
+import { API } from "../../utils/variables";
+import RecenterAutomatically from "./RecenterAutomatically";
 
 function MapComponent({ mapCenter, input }) {
 	const [data, setData] = useState();
@@ -14,11 +15,14 @@ function MapComponent({ mapCenter, input }) {
 			})
 			.then((res) => {
 				setData(res);
+				
 			});
 	}, [input, setData]);
 
 	return (
-		<MapContainer center={mapCenter} zoom={13} scrollWheelZoom={true}>
+
+		<MapContainer center={mapCenter} zoom={13} 
+		scrollWheelZoom={true}>
 			<TileLayer
 				attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 				url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
@@ -38,7 +42,9 @@ function MapComponent({ mapCenter, input }) {
 							</Popup>
 						</Marker>
 					))}
+					<RecenterAutomatically lat={mapCenter[0]} lng={mapCenter[1]} />
 		</MapContainer>
+
 	);
 }
 
