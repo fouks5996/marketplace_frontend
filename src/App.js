@@ -10,6 +10,7 @@ import ArticleDetails from "./pages/articleDetails/ArticleDetails";
 import Map from "./pages/map/Map";
 import Chat from "./pages/chat/Chat";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import Test from "./components/Test";
 
 function App() {
 
@@ -28,6 +29,8 @@ function App() {
 					<Route path='/login' element={<FormLogin />} />
 					<Route path='/show/:articleId' element={<ArticleDetails />} />
 					<Route path="/map" element={<Map/>}/>
+					<Route path="/test" element={<Test/>}/>
+					
 					
 				</Routes>
 			</Layout>
