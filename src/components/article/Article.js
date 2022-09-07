@@ -35,9 +35,6 @@ function Article({ article, allowEdit, forceUpdate }) {
 	};
 
 	const onSubmit = (data) => {
-		console.log('data', data)
-		
-
 		fetch(`${API}/articles/${article.id}`, {
 			method: "PUT",
 			headers: {
@@ -54,7 +51,6 @@ function Article({ article, allowEdit, forceUpdate }) {
 			.then((res) => {
 				getCoordinate(data.location, article.id);
 			});
-
 	};
 
 	function shortedString(string, length) {

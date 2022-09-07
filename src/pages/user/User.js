@@ -34,6 +34,9 @@ function User(props) {
 			{data && (
 				<>
 					<h1 className='text-2xl font-bold text-center mt-5'>{data.email}</h1>
+					{data.avatar_url && (
+						<img alt={data.avatar.name} src={data.avatar_url} />
+					)}
 					<div id='grid-container'>
 						{isLogged && (
 							<div id='form-container'>
