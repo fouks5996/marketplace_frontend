@@ -44,8 +44,6 @@ function Home(props) {
 		setRadio(event.target.value);
 	};
 
-	console.log(data);
-
 	return (
 		<div className='home'>
 			<div className='hero-container'>

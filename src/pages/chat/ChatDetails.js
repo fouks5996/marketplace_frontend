@@ -21,8 +21,6 @@ function ChatDetails({ data }) {
 			})
 			.then((data) => {
 				setMessage(data);
-				const elem = document.getElementById("chatWrapper");
-				elem.scrollTop = elem.scrollHeight;
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [reducerValue]);
