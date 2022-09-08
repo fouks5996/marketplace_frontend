@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { API } from "../../utils/variables";
 import Article from "../../components/article/Article";
-import hero from "../../assets/images/hero.jpeg";
 import { Link } from "react-router-dom";
 import "./home.scss";
 import { logged } from "../../components/atoms/logged";
@@ -48,7 +47,10 @@ function Home(props) {
 		<div className='home'>
 			<div className='hero-container'>
 				<div className='img-container'>
-					<img src={hero} alt='' />
+					<img
+						src='https://media.vanityfair.fr/photos/62552e007e811623e1a5c2b2/16:9/w_2560%2Cc_limit/5.%2520Photo%2520by%2520Dronalist.jpeg'
+						alt=''
+					/>
 					<h1>Bienvenue sur notre MarketPlace</h1>
 					<div className='btn-container'>
 						<Link to={isLogged ? "/user" : "/login"}>
