@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useGet";
 import Cookies from "js-cookie";
 import { API } from "../../utils/variables";
-import './ArticleDetails.scss';
+// import './ArticleDetails.scss';
 
 function ArticleDetails() {
 	const articleId = useParams().articleId;

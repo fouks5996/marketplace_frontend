@@ -7,7 +7,7 @@ import { errorMessageValues, errorInput, errorMessage } from "../auth/errors";
 import { API } from "../../utils/variables";
 import { logged } from "../atoms/logged";
 import { Link } from "react-router-dom";
-import "./article.scss";
+// import "./article.scss";
 import ScrollReveal from "scrollreveal";
 import ArticleTags from "./ArticleTags";
 import { getCoordinate } from "../functions/getCoordinates";

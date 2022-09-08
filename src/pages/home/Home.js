@@ -3,7 +3,7 @@ import { API } from "../../utils/variables";
 import Article from "../../components/article/Article";
 import hero from "../../assets/images/hero.jpeg";
 import { Link } from "react-router-dom";
-import "./home.scss";
+// import "./home.scss";
 import { logged } from "../../components/atoms/logged";
 import { useAtomValue } from "jotai";
 import Box from "@mui/material/Box";

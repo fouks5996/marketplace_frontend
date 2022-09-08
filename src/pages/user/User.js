@@ -7,7 +7,7 @@ import { logged } from "../../components/atoms/logged";
 import CreateArticle from "../../components/CreateArticle";
 import FormEdit from "../../components/userEdit/FormEdit";
 import { API } from "../../utils/variables";
-import "./user.scss";
+// import "./user.scss";
 
 function User(props) {
   const token = Cookies.get("token");

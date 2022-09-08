@@ -5,7 +5,7 @@ import usePostForm from "../usePostForm";
 import { currentuser, logged } from "../../atoms/logged";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../../utils/variables";
-import "../register/register.scss"
+// import "../register/register.scss"
 
 function Form(props) {
 	const {

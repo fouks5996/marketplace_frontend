@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { useForm } from "react-hook-form";
-import "https://unpkg.com/leaflet@1.8.0/dist/leaflet.js";
+// import "https://unpkg.com/leaflet@1.8.0/dist/leaflet.js";
 import { errorMessageValues } from "../../components/auth/errors";
 import MapComponent from "../../components/map_components/MapComponent";
 import { API } from "../../utils/variables";
