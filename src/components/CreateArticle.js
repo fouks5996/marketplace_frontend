@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import {
 	errorMessageValues,
@@ -11,6 +11,8 @@ import { getCoordinate } from "./functions/getCoordinates";
 
 function CreateArticle({ forceUpdate }) {
 	const token = Cookies.get("token");
+	const [autocomplete, setAutocomplete] = useState();
+	const [autocompleteVisible, setAutocompleteVisible] = useState(false);
 
 	const {
 		register,
@@ -34,8 +36,23 @@ function CreateArticle({ forceUpdate }) {
 			.then((res) => {
 				getCoordinate(res.location, res.id);
 			});
-			
 	};
+
+	function getData(e) {
+		if (e.target.value.length > 4) {
+			fetch(
+				`https://api.geoapify.com/v1/geocode/autocomplete?text=${e.target.value}&format=json&apiKey=9aa5158850824f25b76a238e1d875cc8`
+			)
+				.then((response) => response.json())
+				.then((data) => {
+					setAutocompleteVisible(true);
+					setAutocomplete(data);
+				})
+				.catch((err) => console.error(err));
+		} else {
+			setAutocompleteVisible(false);
+		}
+	}
 
 	return (
 		<>
@@ -86,15 +103,28 @@ function CreateArticle({ forceUpdate }) {
 					/>
 					{errorMessage(errors.price)}
 				</div>
-				<div className='flex flex-col'>
+				<div className='flex flex-col relative'>
 					<p> Location </p>
 					<input
 						className={`border h-10 pl-3 rounded-md  ${errorInput(
 							errors.location
 						)}`}
+						onChange={getData}
 						type='text'
-						{...register("location", errorMessageValues.location)}
+						// {...register("location", errorMessageValues.location)}
 					/>
+					{autocompleteVisible && (
+						<div className='border border-slate-500 rounded-xl p-3 absolute top-20 z-10 bg-white'>
+							{" "}
+							{autocomplete &&
+								autocomplete.results.map((res) => (
+									<p className='border-b border-slate-300 py-1 hover:bg-slate-100 cursor-pointer'>
+										{console.log(res)}
+										{res.formatted}{" "}
+									</p>
+								))}{" "}
+						</div>
+					)}
 					{errorMessage(errors.location)}
 				</div>
 				<div className='flex items-center gap-2'>
